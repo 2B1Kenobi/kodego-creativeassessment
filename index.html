@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Developer Assessment</title>
+    <style type="text/css">
+    * {
+        overflow: hidden;
+    }
+
+    body {
+        background-color: #000;
+    }
+
+    img {
+        position: absolute;
+        object-fit: cover;
+        width: min(100vw, 100vh);
+        margin: 0 auto;
+        opacity: 0;
+    }
+
+    #female {
+        transition: all 0.5s ease-in-out;
+        width: min(60vw, 60vh);
+        opacity: 1;
+        margin-left: min(25vw, 25vh);
+        margin-top: min(5vw, 5vh);
+    }
+
+    #female.hide {
+        opacity: 0;
+    }
+
+    #headline1 {
+        transition: all 1s ease-in-out;
+        width: min(70vw, 70vh);
+        margin-top: min(60vw, 60vh);
+        margin-left: min(5vw, 5vh);
+        opacity: 1;
+    }
+
+    #headline1.hide {
+        margin-left: min(-80vw, -80vh);
+    }
+
+    #headline1.zoomout {
+        transition: all 0.5s ease-in-out;
+        margin-left: calc(min(100vw, 100vh)/2);
+        margin-top: calc(min(100vw, 100vh)/4);
+        width: 1px;
+        opacity: 0;
+    }
+
+    #headline2 {
+        transition: all 1s ease-in-out;
+        opacity: 1;
+        width: min(60vw, 60vh);
+        margin-top: min(15vw, 15vh);
+        margin-left: min(2vw, 2vh);
+    }
+
+    #headline2.hide {
+        opacity: 0;
+    }
+
+    #subheadline {
+        transition: all 1s;
+        opacity: 1;
+        width: min(50vw, 50vh);
+        top: 0;
+        margin-top: min(40vw, 40vh);
+        margin-left: min(50vw, 50vh);
+    }
+
+    #subheadline.hide {
+        opacity: 0;
+    }
+
+    #learnmore {
+        transition: all 1s;
+        opacity: 1;
+        width: min(40vw, 40vh);
+        margin-left: min(30vw, 30vh);
+        margin-top: min(70vw, 70vh);
+    }
+
+    #learnmore.hide {
+        opacity: 0;
+    }
+
+    #replay {
+        transition: all 1s;
+        display: flex;
+        opacity: 1;
+        margin: 0 auto;
+        width: min(20vw, 20vh);
+        margin-top: min(85vw, 85vh);
+    }
+
+    #replay img {
+        position: relative;
+        opacity: 1;
+    }
+
+    #replay.hide {
+        display: none;
+        opacity: 0;
+    }
+
+    #logo {
+        transition: all 1s;
+        opacity: 1;
+        width: min(40vw, 40vh);
+        margin-top: min(5vw, 5vh);
+        margin-left: min(55vw, 55vh);
+    }
+
+    #logo.hide {
+        margin-left: min(-100vw, -100vh);
+    }
+    </style>
+</head>
+
+<body>
+    <div style="width: min(100vw, 100vh); height: min(100vw, 100vh); overflow: hidden; margin: 0 auto;">
+        <img src="assets/background.png" alt="background image" style="z-index: -1; width: min(100vw, 100vh); height: min(100vw, 100vh); object-fit: cover; opacity: 1;">
+        <img src="assets/female.png" alt="female" id="female" class="hide">
+        <img src="assets/headline1.png" alt="" id="headline1" class="hide" style="z-index: 3;">
+        <img src="assets/headline2.png" alt="" id="headline2" class="hide">
+        <img src="assets/learnmore.png" alt="" id="learnmore" class="hide">
+        <img src="assets/logo.png" alt="" id="logo" class="hide">
+        <a href="#" onclick="replay()" id="replay" class="hide">
+            <img src="assets/replay.png" alt="replay button" onclick="replay()">
+        </a>
+        <img src="assets/subheadline.png" alt="subheadline" id="subheadline" class="hide">
+    </div>
+    <script>
+    function beginAnim() {
+        console.log('Animation Start')
+        let animStart = new Date().getTime();
+        let x = setInterval(function() {
+            let now = new Date().getTime();
+            let duration = now - animStart;
+            let ms = Math.floor((duration % (1000 * 60)) / 100) * 100; // GET ONLY DECISECOND VALUES
+
+            // LOG KEYFRAME
+            if (0 == Math.floor(ms % 1000)) {
+                console.log(ms / 1000);
+            }
+
+            if (ms == 1000) {
+                document.getElementById("female").classList.remove("hide");
+                console.log("Showing female");
+            }
+
+            if (ms == 1500) {
+                document.getElementById("headline1").classList.remove("hide");
+                console.log("Showing Headline 1");
+            }
+
+            if (ms == 2500) {
+                document.getElementById("female").classList.add("hide");
+                console.log("Hiding female");
+            }
+
+            if (ms == 3400) {
+                document.getElementById("headline1").classList.add("zoomout");
+            }
+
+            if (ms == 2900) {
+                document.getElementById("headline2").classList.remove("hide");
+                console.log("Showing Headline 2");
+            }
+
+            if (ms == 4000) {
+                document.getElementById("subheadline").classList.remove("hide");
+            }
+
+            if (ms == 4400) {
+                document.getElementById("learnmore").classList.remove("hide");
+            }
+
+            if (ms == 4800) {
+                document.getElementById("logo").classList.remove("hide");
+            }
+
+            if (ms == 5000) {
+                document.getElementById("replay").classList.remove("hide");
+            }
+
+            if (ms >= 15000) {
+                clearInterval(x);
+                console.log('Animation End');
+            }
+        }, 100);
+    }
+
+    function replay() {
+        document.getElementById("female").classList.add("hide");
+        document.getElementById("headline1").classList.add("hide");
+        document.getElementById("headline1").classList.remove("zoomout");
+        document.getElementById("headline2").classList.add("hide");
+        document.getElementById("subheadline").classList.add("hide");
+        document.getElementById("learnmore").classList.add("hide");
+        document.getElementById("logo").classList.add("hide");
+        document.getElementById("replay").classList.add("hide");
+        beginAnim();
+    }
+
+    window.onload = (event) => {
+        console.log("Page Loaded. Beginning animation.")
+        beginAnim();
+    };
+    </script>
+</body>
+
+</html>
